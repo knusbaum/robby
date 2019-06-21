@@ -17,7 +17,7 @@ service {
 }
 ```
 
-That's it. Robby will find that `urlprefix-`, and route any incoming web requests with header `Host: example.com` to wherever Nomad hosts that service. Robby keeps up to date with Nomad, and will correctly route as your service moves around the cluster.
+That's it. Robby will find that `urlprefix-`, and route any incoming web requests with header `Host: example.com` to wherever Nomad hosts that service. If your service is running multiple instances, Robby will pick one at random. Robby keeps up to date with Nomad, and will correctly route as your service moves around the cluster.
 
 Wildcards also work. You can set your `urlprefix-` to, e.g. `"urlprefix-*example.com"` to route `example.com` and any subdomains to that service.
 
@@ -26,7 +26,7 @@ The `urlprefix-` is meant to be compatible with [fabio](https://github.com/fabio
 
 ## Config
 Robby looks for `/etc/robby.yml` for configuration. There's a sample config called `robby.yml` in this repo.
-If no config is present, robby uses the default listening ip and port of `0.0.0.0:9001`
+If no config is present, Robby uses the default listening ip and port of `0.0.0.0:9001`
 
 
 ## Performance
@@ -42,13 +42,13 @@ docker run -d -p8500:8500 consul:latest
 
 Have something to proxy to. For example, listening on `0.0.0.0:8000`.
 
-Then, register a service with consul, including a `urlprefix-` tag. If robby is listening on the default port (9001), and your web service is accepting connections on `127.0.0.1:8000`, then this should work:
+Then, register a service with consul, including a `urlprefix-` tag. If Robby is listening on the default port (9001), and your web service is accepting connections on `127.0.0.1:8000`, then this should work:
 ```
 curl -X PUT -H "Content-Type: application/json" -d '{ "Name": "TEST", "Tags": ["urlprefix-localhost:9001"], "Port": 8000, "Address": "127.0.0.1" }' http://127.0.0.1:8500/v1/agent/service/register
 ```
 Adjust the `"Port"` and `"Address"` fields as necessary.
 
-Run robby
+Run Robby
 ```
 cargo run
 ```
