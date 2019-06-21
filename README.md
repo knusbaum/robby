@@ -27,3 +27,7 @@ The `urlprefix-` is meant to be compatible with [fabio](https://github.com/fabio
 ## Config
 Robby looks for `/etc/robby.yml` for configuration. There's a sample config called `robby.yml` in this repo.
 If no config is present, robby uses the default listening ip and port of `0.0.0.0:9001`
+
+
+## Performance
+See [load testing with locust](locust)
