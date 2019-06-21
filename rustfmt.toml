@@ -1,0 +1,4 @@
+merge_imports = true
+format_strings = true
+wrap_comments = true
+max_width = 100
