@@ -31,3 +31,26 @@ If no config is present, robby uses the default listening ip and port of `0.0.0.
 
 ## Performance
 See [load testing with locust](locust)
+
+
+## Local test
+
+If you want to test it out locally, the easiest way is to bring up a `consul` docker container:
+```
+docker run -d -p8500:8500 consul:latest
+```
+
+Have something to proxy to. For example, listening on `0.0.0.0:8000`.
+
+Then, register a service with consul, including a `urlprefix-` tag. If robby is listening on the default port (9001), and your web service is accepting connections on `127.0.0.1:8000`, then this should work:
+```
+curl -X PUT -H "Content-Type: application/json" -d '{ "Name": "TEST", "Tags": ["urlprefix-localhost:9001"], "Port": 8000, "Address": "127.0.0.1" }' http://127.0.0.1:8500/v1/agent/service/register
+```
+Adjust the `"Port"` and `"Address"` fields as necessary.
+
+Run robby
+```
+cargo run
+```
+
+Finally, navigate to [`http://localhost:9001`](http://localhost:9001).
