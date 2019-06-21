@@ -6,7 +6,7 @@ Just add a tag to your Nomad web service, and Robby will pick it up and proxy co
 ## Example
 
 If I host `example.com` in my Nomad cluster, I add the tag `"urlprefix-example.com/"` to the `service` section
-of my nomad service config:
+of my Nomad service config:
 ```
 service {
     name = "example-com"
@@ -15,8 +15,13 @@ service {
 }
 ```
 
-That's it. Robby will find that `urlprefix-`, and route any incoming web requests with header `Host: example.com` to wherever nomad hosts that service. Robby keeps up to date with Nomad, and will correctly route as your service moves around the cluster.
+That's it. Robby will find that `urlprefix-`, and route any incoming web requests with header `Host: example.com` to wherever Nomad hosts that service. Robby keeps up to date with Nomad, and will correctly route as your service moves around the cluster.
 
 Wildcards also work. You can set your `urlprefix-` to, e.g. `"urlprefix-*example.com"` to route `example.com` and any subdomains to that service.
 
-The `urlprefix-` is meant to be compatible with (fabio)[https://github.com/fabiolb/fabio] but only a subset (host matching) is implemented currently.
+The `urlprefix-` is meant to be compatible with [fabio](https://github.com/fabiolb/fabio) but only a subset (host matching) is implemented currently.
+
+
+## Config
+Robby looks for `/etc/robby.yml` for configuration. There's a sample config called `robby.yml` in this repo.
+If no config is present, robby uses the default listening ip and port of `0.0.0.0:9001`

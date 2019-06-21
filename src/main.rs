@@ -57,7 +57,7 @@ fn get_config() -> config::Config {
     let mut conf = config::Config::default();
     conf.set_default("bind_host", "0.0.0.0")
         .unwrap()
-        .set_default("bind_port", 60000)
+        .set_default("bind_port", 9001)
         .unwrap();
 
     conf.merge(config::File::with_name("/etc/robby"))
