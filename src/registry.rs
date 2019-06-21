@@ -16,6 +16,9 @@ pub enum GetHostError {
     StrErr(String),
 }
 
+// This trait is only here for use in tests right now.
+// In the future, I would like to make this trait more generic to allow
+// for other ServiceProviders to be used with the proxy.
 pub trait ServiceProvider {
     fn services(&self) -> Result<HashMap<String, Vec<String>>, String>;
     fn get_nodes(&self, service: String) -> Result<Vec<knusbaum_consul::ServiceNode>, String>;
