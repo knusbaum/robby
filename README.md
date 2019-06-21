@@ -1,6 +1,6 @@
 # Robby
 
-![](https://api.travis-ci.com/knusbaum/robby.svg?branch=master)
+[![Build Status](https://travis-ci.com/knusbaum/robby.svg?branch=master)](https://travis-ci.com/knusbaum/robby)
 
 Robby is an ingress web proxy for your [Nomad](https://www.nomadproject.io/) cluster.
 Just add a tag to your Nomad web service, and Robby will pick it up and proxy connections to your service.
